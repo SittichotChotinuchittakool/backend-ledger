@@ -1,0 +1,21 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="init ledger 1.0.0" author="C. Sittichot">
+        <createTable tableName="ledger_info">
+            <column name="id" type="VARCHAR(32)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="amount" type="DECIMAL(19,2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="memo" type="TEXT"/>
+            <column name="ledger_type" type="TINYINT"/>
+            <column name="created_time" type="DATETIME(6)" defaultValueDate="NOW(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
