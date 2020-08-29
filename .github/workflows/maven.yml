@@ -21,4 +21,8 @@ jobs:
       with:
         java-version: 14
     - name: Build with Maven
-      run: mvn clean install -Dspring.profiles.active=github
+      run: mvn clean install
+      env:
+        SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+        SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
+        SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
