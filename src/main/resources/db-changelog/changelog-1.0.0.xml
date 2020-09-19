@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-    <changeSet id="init ledger 1.0.0" author="C. Sittichot">
+    <changeSet id="1.0.0-1 init ledger" author="C. Sittichot">
         <createTable tableName="ledger_info">
             <column name="id" type="VARCHAR(32)">
                 <constraints primaryKey="true"/>
@@ -16,6 +16,46 @@
             <column name="created_time" type="DATETIME(6)" defaultValueDate="NOW(6)">
                 <constraints nullable="false"/>
             </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_type" type="TINYINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_date" type="DATE(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="BIGINT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
+    </changeSet>
+    <changeSet id="1.0.0-2 create index created_by_idx into table ledger_info" author="C. Sittichot">
+        <createIndex indexName="created_by_idx"
+                     tableName="ledger_info">
+            <column name="created_by"/>
+        </createIndex>
+        <createIndex tableName="ledger_info" indexName="payment_date_idx">
+            <column name="payment_date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1.0.0-3 create table user info" author="C. Sittichot">
+        <createTable tableName="user_info">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="VARCHAR(30)">
+                <constraints unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <createIndex tableName="user_info" indexName="user_id_idx">
+            <column name="user_id"/>
+        </createIndex>
     </changeSet>
 </databaseChangeLog>

@@ -10,7 +10,7 @@ public enum LedgerType{
     private int value;
     private static final Map<Integer, LedgerType> ALL = getAllValue();
 
-    private static Map<Integer, LedgerType> getAllValue() {
+    public static Map<Integer, LedgerType> getAllValue() {
         Map<Integer, LedgerType> ledgerTypeMap = new HashMap<>();
         for(LedgerType value : LedgerType.values()) {
             ledgerTypeMap.put(value.getValue(), value);
